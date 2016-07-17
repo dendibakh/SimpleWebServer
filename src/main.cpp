@@ -1,10 +1,10 @@
 #include <boost/program_options.hpp>
 
 #include <iostream>
-#include <thread>
 #include <boost/filesystem.hpp>
 
 #include "server.hpp"
+#include "daemonize.h"
 
 using namespace boost::asio;
 using namespace boost::program_options;
@@ -72,8 +72,8 @@ int main(int argc, char* argv[])
            return 1;
        }
 
-       std::thread server([=](){startServer(IP, port, homeDir);});
-       server.detach();
+       if (daemonize())
+           startServer(IP, port, homeDir);
    }                                                                    
    catch(std::exception& e)
    {
