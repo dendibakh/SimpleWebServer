@@ -1,9 +1,14 @@
 #include <boost/program_options.hpp>
-#include <boost/asio.hpp>
+
 #include <iostream>
+#include <thread>
+#include <boost/filesystem.hpp>
+
+#include "server.hpp"
 
 using namespace boost::asio;
 using namespace boost::program_options;
+using namespace boost::filesystem;
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -60,7 +65,15 @@ int main(int argc, char* argv[])
            return 1;
        }
 
+       std::string homeDir = vm["d"].as< string >();
+       if (!is_directory(homeDir))
+       {
+           cout << "Home directory for the server do not exists." << endl << desc;
+           return 1;
+       }
 
+       std::thread server([=](){startServer(IP, port, homeDir);});
+       server.detach();
    }                                                                    
    catch(std::exception& e)
    {
