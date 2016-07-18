@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
            return 1;
        }
 
-       if (daemonize())
+       //if (daemonize())
            startServer(IP, port, homeDir);
    }                                                                    
    catch(std::exception& e)

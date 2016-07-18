@@ -18,6 +18,8 @@ void startServer(const boost::asio::ip::address addr, int port, const std::strin
 	      ip::tcp::socket socket (io);
 	      acceptor.accept(socket);
 
+	      std::cout << "Connection established.\n";
+
 	      while (true) 
 	      {
 		 boost::asio::streambuf buffer;
