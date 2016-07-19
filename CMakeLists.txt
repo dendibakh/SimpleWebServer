@@ -7,10 +7,10 @@ set(Boost_USE_MULTITHREADED ON)
 find_package(Boost COMPONENTS program_options filesystem system REQUIRED)
 find_library(httpParser NAMES http_parser REQUIRED)
 
-set(SRC_LIST src/main.cpp src/server.cpp src/daemonize.cpp src/helpers.cpp)
+file(GLOB_RECURSE SRC_LIST src/*.cpp)
 include_directories(src)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -Wall")
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} ${httpParser} pthread)
