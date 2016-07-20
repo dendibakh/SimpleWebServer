@@ -15,9 +15,6 @@ void Connection::doAsyncRead()
 	      {
 	        if (!ec)
 	        {
-	          //std::cout << "Received http request: " << buffer.data() << "\n";
-	          //doAsyncReply(reply::stock_reply(reply::ok));
-
 	          request_parser::result_type result;
 	          std::tie(result, std::ignore) = parser.parse(req, buffer.data(), buffer.data() + bytes_transferred);
 
