@@ -54,7 +54,7 @@ void HttpServer::doAsyncAccept()
 			 if (!ec)
 			 {
 				 std::cout << "New connection established.\n";
-				 connections.push_back(std::make_unique<Connection>(std::move(socket)));
+				 connections.push_back(std::make_unique<Connection>(std::move(socket), homeDir));
 				 connections.back()->doAsyncRead();
 			 }
 

@@ -3,12 +3,7 @@
 #include <string>
 #include <vector>
 #include <boost/asio.hpp>
-
-struct header
-{
-  std::string name;
-  std::string value;
-};
+#include "header.hpp"
 
 /// A reply to be sent to a client.
 struct reply
