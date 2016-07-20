@@ -1,4 +1,5 @@
 #include "Connection.hpp"
+#include "RequestHandler.hpp"
 #include <iostream>
 
 Connection::Connection(boost::asio::ip::tcp::socket&& socket) : socket(std::move(socket))
@@ -13,7 +14,9 @@ void Connection::doAsyncRead()
 	      {
 	        if (!ec)
 	        {
-	          std::cout << "Received http request: " << buffer.data() << "\n";
+	          //std::cout << "Received http request: " << buffer.data() << "\n";
+	          RequestHandler rh;
+	          rh.parse(std::string(buffer.data(), buffer.data() + bytes_transferred));
 	          rep = reply::stock_reply(reply::ok);
 	          doAsyncReply();
 	          /*request_parser::result_type result;
